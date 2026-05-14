@@ -1,2 +1,2 @@
 # sortition
-going to try to dump code here
+algorithm implementation and analysis code for my thesis
