@@ -25,6 +25,7 @@ def parse_args():
 
 def console_print(message):
     """Print with immediate flush so progress shows in real time."""
+    #relevant for shell scripts
     print(message, flush=True)
 
 
