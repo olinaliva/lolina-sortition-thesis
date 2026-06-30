@@ -9,6 +9,19 @@ Assembly size is inferred from the instance name (last underscore-separated toke
 Usage:
     python run_SA.py --instance instance_name_size 
     python run_SA.py --instance instance_name_size --num_draws 100
+
+NOTES:
+    - the SA parameters did not any undergo optimization, guided by default parameters in the R version
+    - no code to process "priority" since no datasets in analysis used it, 
+        see original R implementation for details
+    - penalizes the distance from midpoints, but has code to penalize distance from quotas (can be swapped)
+    - respondents, categories, output file paths are all tweaked in main, by default
+        respondents_file = f'input-data/{instance}/respondents.csv'
+        categories_file  = f'input-data/{instance}/categories.csv'
+        output_file      = f'intermediate_data/dropped_0/{instance}/SA_panels_output.csv'
+    - assigns each panel 1/[number of panels] probability, 
+        merges panels with the same set of people and sums their probabilities
+    
 """
 
 import argparse
@@ -223,6 +236,7 @@ def main():
     respondents_file = f'input-data/{instance}/respondents.csv'
     categories_file  = f'input-data/{instance}/categories.csv'
     output_file      = f'intermediate_data/dropped_0/{instance}/SA_panels_output.csv'
+    # output_file      = f'intermediate_data/dropped_0/{instance}/SA_panels_output_big.csv'
 
     np.random.seed(RANDOM_SEED % (2**32))
 
