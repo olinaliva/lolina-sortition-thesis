@@ -13,6 +13,7 @@ import argparse
 import csv
 import numpy as np
 import pandas as pd
+import random
 from sortition_algorithms import run_stratification, read_in_features, read_in_people, Settings
 
 
@@ -74,6 +75,7 @@ def load_people(respondents_file, features, columns_to_keep, assembly_size):
         reader = csv.DictReader(f)
         people_rows = list(reader)
 
+    random.shuffle(people_rows)
     people_head = list(people_rows[0].keys())
 
     settings = Settings(
@@ -89,7 +91,7 @@ def load_people(respondents_file, features, columns_to_keep, assembly_size):
 def run_draws(instance, num_draws):
     categories_file  = f'input-data/{instance}/categories.csv'
     respondents_file = f'input-data/{instance}/respondents.csv'
-    output_file      = f'intermediate_data/dropped_0/{instance}/diversimax_panels_output.csv'
+    output_file      = f'intermediate_data/dropped_0/{instance}/diversimax_panels_output_shuffle.csv'
     assembly_size    = int(instance.split('_')[-1])
     columns_to_keep  = get_columns_to_keep(categories_file)
 
